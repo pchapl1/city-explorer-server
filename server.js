@@ -6,16 +6,22 @@ require('dotenv').config();
 const cors = require('cors');
 
 //syntax for getting data 
-let data = require("/weather.json")
-console.log(data)
+let weatherData = require("./weather.json")
+
 //USE
 const app = express();
 const PORT = process.env.PORT || 3002;
-app.use(cors);
+app.use(cors());
 
 // ROUTES
 app.get(`/`, ( req, res )=>{
     res.send('hello from our server')
+})
+
+app.get('/weather', (req, res, next)=> {
+    console.log(weatherData)
+
+    res.send(weatherData)
 })
 
 

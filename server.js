@@ -6,8 +6,8 @@ require('dotenv').config();
 const cors = require('cors');
 
 //syntax for getting data 
-// let data = require("/data.json")
-
+let data = require("/weather.json")
+console.log(data)
 //USE
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -20,20 +20,20 @@ app.get(`/`, ( req, res )=>{
 
 
 // get animal by species
-app.get('/pet', (req, res, next)=>{
-    try {
-        let speciesRequested = req.query.species;
+// app.get('/pet', (req, res, next)=>{
+//     try {
+//         let speciesRequested = req.query.species;
 
-        let petObject = speciesRequested.find(pet => pet.species === species)
+//         let petObject = speciesRequested.find(pet => pet.species === species)
     
-        let selectedPet = new Pet(petObject)
+//         let selectedPet = new Pet(petObject)
     
-        res.send(selectedPet)
+//         res.send(selectedPet)
         
-    } catch (error) {
-        next(error)
-    }
-})
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 // // CLASSES
 // class Pet {

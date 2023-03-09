@@ -2,7 +2,7 @@
 const axios = require('axios')
 
 async function getMovies(req, res, next){
-    console.log('in get movies')
+    // console.log('in get movies')
     try {
         let cityToFind = req.query.city
 

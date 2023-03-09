@@ -3,7 +3,7 @@ const axios = require('axios')
 
 
 async function getWeather (req, res, next){
-
+        console.log('in get weather')
         let cityToFind = req.query.city
 
         let params = {
@@ -13,6 +13,9 @@ async function getWeather (req, res, next){
         }
 
         let url = `https://api.weatherbit.io/v2.0/forecast/daily`;
+
+        // let data = await axios.get(url, {params})
+        // console.log(data)
 
         axios.get(url, {params})
             .then(resultsFromApi => resultsFromApi.data.data.map(item => new ForeCast(item)))

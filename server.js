@@ -24,8 +24,6 @@ app.get('/weather', getWeather );
 
 app.get('/movies', getMovies);
 
-
-
 //Error handler
 app.use((error, req, res, next)=> {
     res.status(500).send(error.message)

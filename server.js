@@ -19,35 +19,24 @@ app.get(`/`, ( req, res )=>{
 })
 
 app.get('/weather', (req, res, next)=> {
-    console.log(weatherData)
+    let cityToFind = req.query.city
 
-    res.send(weatherData)
+    // console.log(weatherData)
+    let resultCity = weatherData.find(city => city.city_name === cityToFind)
+    // console.log("result city: ", resultCity)
+
+
+    let selectedCity = resultCity.data.map(item => new ForeCast(item))
+    // console.log("selected city: ", selectedCity)
+    res.send(selectedCity)
 })
+class ForeCast {
+    constructor(WeatherObject) {
+        this.date = WeatherObject.valid_date,
+        this.description = `Low of ${WeatherObject.low_temp}, high of ${WeatherObject.max_temp} with ${WeatherObject.weather.description.toLowerCase()}`
+    }
+}
 
-
-// get animal by species
-// app.get('/pet', (req, res, next)=>{
-//     try {
-//         let speciesRequested = req.query.species;
-
-//         let petObject = speciesRequested.find(pet => pet.species === species)
-    
-//         let selectedPet = new Pet(petObject)
-    
-//         res.send(selectedPet)
-        
-//     } catch (error) {
-//         next(error)
-//     }
-// })
-
-// // CLASSES
-// class Pet {
-//     constructor(PetObject) {
-//         this.name = PetObject.name,
-//         this.breed = PetObject.breed
-//     }
-// }
 
 
 //Error handler

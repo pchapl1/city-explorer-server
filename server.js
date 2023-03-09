@@ -4,6 +4,7 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const axios = require('axios')
 
 //syntax for getting data 
 let weatherData = require("./weather.json")
@@ -18,18 +19,24 @@ app.get(`/`, ( req, res )=>{
     res.send('hello from our server')
 })
 
-app.get('/weather', (req, res, next)=> {
+app.get('/weather', async (req, res, next) => {
     let cityToFind = req.query.city
 
-    // console.log(weatherData)
-    let resultCity = weatherData.find(city => city.city_name === cityToFind)
-    // console.log("result city: ", resultCity)
+    let url = `https://api.weatherbit.io/v2.0/forecast/daily?&city=${cityToFind}&key=${process.env.WEATHER_API_KEY}&days=3`
 
+    console.log(url)
 
-    let selectedCity = resultCity.data.map(item => new ForeCast(item))
-    // console.log("selected city: ", selectedCity)
-    res.send(selectedCity)
+    try {
+        let resultCity = await axios.get(url)
+        console.log(resultCity.data)
+        let selectedCity = resultCity.data.data.map(item => new ForeCast(item))
+        res.send(selectedCity)
+    } catch (error) {
+        console.log(error)
+    }
+
 })
+
 class ForeCast {
     constructor(WeatherObject) {
         this.date = WeatherObject.valid_date,

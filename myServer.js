@@ -14,7 +14,6 @@ const getMovies = require('./modules/movies');
 const app = express();
 const PORT = process.env.PORT || 3002;
 app.use(cors());
-
 // ROUTES
 app.get(`/`, ( req, res )=>{
     res.send('hello from our server');
@@ -33,5 +32,6 @@ app.use((error, req, res, next)=> {
 app.get('*', (req, res) => {
     res.send('404 Error')
 })
+
 
 app.listen(PORT, ()=> console.log(`listening on Port ${PORT}`));

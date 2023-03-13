@@ -1,8 +1,7 @@
 'use strict';
 
 let cache = require('./cache.js');
-
-module.exports = getWeather;
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
 function getWeather(latitude, longitude) {
   const key = 'weather-' + latitude + longitude;
@@ -38,3 +37,5 @@ class Weather {
     this.time = day.datetime;
   }
 }
+
+module.exports = getWeather;
